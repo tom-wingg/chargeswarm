@@ -23,6 +23,7 @@ class SubscriptionBuilder
     protected $customerFirstName;
     protected $customerLastName;
     protected $customerCompany;
+    protected $customerId;
 
     protected $billingEmail;
     protected $billingFirstName;
@@ -126,12 +127,13 @@ class SubscriptionBuilder
      * @param string $company
      * @return \Rennokki\Chargeswarm\SubscriptionBuilder
      */
-    public function withCustomerData($email = null, $firstName = null, $lastName = null, $company = null)
+    public function withCustomerData($email = null, $firstName = null, $lastName = null, $company = null, $id = null)
     {
         $this->customerEmail = $email;
         $this->customerFirstName = $firstName;
         $this->customerLastName = $lastName;
         $this->customerCompany = $company;
+        $this->customerId = $id;
 
         return $this;
     }
@@ -258,6 +260,7 @@ class SubscriptionBuilder
             'lastName' => $this->customerLastName,
             'email' => $this->customerEmail,
             'company' => $this->customerCompany,
+            'id' => $this->customerId,
         ]);
 
         $subscription->put('billingAddress', [
