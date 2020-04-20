@@ -11,7 +11,7 @@ class SubscriptionBuilder
     protected $model = null;
     protected $planId = null;
     protected $addons = [];
-    protected $couponId = null;
+    protected $coupons = [];
     protected $billingCycles = 1;
     protected $quantity = 1;
     protected $affiliateToken = null;
@@ -95,12 +95,12 @@ class SubscriptionBuilder
     /**
      * Add a coupon to the subscription.
      *
-     * @param string $couponId
+     * @param mixed $coupons
      * @return \Rennokki\Chargeswarm\SubscriptionBuilder
      */
-    public function withCoupon(string $couponId)
+    public function withCoupon($coupons)
     {
-        $this->couponId = $couponId;
+        $this->coupons = $this->coupons->merge((is_string($coupons)) ? [$coupons] : $coupons);
 
         return $this;
     }
@@ -108,7 +108,7 @@ class SubscriptionBuilder
     /**
      * Add addons to the subscription.
      *
-     * @param string $couponId
+     * @param mixed $addons
      * @return \Rennokki\Chargeswarm\SubscriptionBuilder
      */
     public function withAddons($addons)
@@ -252,7 +252,7 @@ class SubscriptionBuilder
         $subscription->put('planId', $this->planId);
         $subscription->put('planQuantity', $this->quantity);
         $subscription->put('addons', $this->addons->toArray());
-        $subscription->put('couponId', $this->couponId);
+        $subscription->put('couponIds', $this->coupons->toArray());
         $subscription->put('billingCycles', $this->billingCycles);
 
         $subscription->put('customer', [
