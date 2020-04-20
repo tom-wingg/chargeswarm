@@ -100,7 +100,10 @@ class SubscriptionBuilder
      */
     public function withCoupon($coupons)
     {
-        $this->coupons = $this->coupons->merge((is_string($coupons)) ? [$coupons] : $coupons);
+        $this->coupons = array_merge(
+            (is_string($coupons)) ? [$coupons] : $coupons,
+            $this->coupons
+        );
 
         return $this;
     }
@@ -252,7 +255,7 @@ class SubscriptionBuilder
         $subscription->put('planId', $this->planId);
         $subscription->put('planQuantity', $this->quantity);
         $subscription->put('addons', $this->addons->toArray());
-        $subscription->put('couponIds', $this->coupons->toArray());
+        $subscription->put('couponIds', $this->coupons);
         $subscription->put('billingCycles', $this->billingCycles);
 
         $subscription->put('customer', [
