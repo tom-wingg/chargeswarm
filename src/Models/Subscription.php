@@ -188,7 +188,7 @@ class Subscription extends Model
             return false;
         }
 
-        $date = ($date && ! is_int($date)) ? Carbon::parse($date) : (is_int($date)) ? $date : null;
+        $date = ($date && ! is_int($date)) ? Carbon::parse($date) : ((is_int($date)) ? $date : null);
 
         $subscription = ChargebeeSubscription::update($this->id, [
             'trialEnd' => (is_int($date)) ? $date : $date->format('U'),
@@ -224,7 +224,7 @@ class Subscription extends Model
             return false;
         }
 
-        $date = ($date && ! is_int($date)) ? Carbon::parse($date) : (is_int($date)) ? $date : null;
+        $date = ($date && ! is_int($date)) ? Carbon::parse($date) : ((is_int($date)) ? $date : null);
 
         $subscription = ChargebeeSubscription::changeTermEnd($this->id, [
             'termEndsAt' => (is_int($date)) ? $date : $date->format('U'),
