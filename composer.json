@@ -26,7 +26,7 @@
         }
     ],
     "require": {
-        "laravel/framework": "~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0",
+        "laravel/framework": ">=5.5.0|^6.0|^7.0",
         "chargebee/chargebee-php": "^2.5.2"
     },
     "require-dev": {
