@@ -4,6 +4,7 @@ namespace Rennokki\Chargeswarm\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class ChargebeeWebhookController extends Controller
 {
@@ -16,7 +17,7 @@ class ChargebeeWebhookController extends Controller
     public function handleWebhook(Request $request)
     {
         $payload = json_decode(file_get_contents('php://input'));
-        $event = studly_case($payload->event_type);
+        $event = Str::studly($payload->event_type);
 
         $subscription = optional($payload->content)->subscription;
         $storedSubscription = null;
